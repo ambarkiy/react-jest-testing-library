@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import ParentComponent from './ParentComponent';
 
-beforeAll(() => {
+beforeEach(() => {
 	jest.mock('./ChildComponent', () => () => <mock-child-component />);
 });
 
-test('mock child component', () => {
-	const { debug } = render(<ParentComponent />);
-	debug();
+test('jest mock in beforeEach not work', () => {
+	const { container } = render(<ParentComponent />);
+	expect(container.querySelector('mock-child-component')).toBeInTheDocument();
 });
